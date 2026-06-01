@@ -28,9 +28,8 @@ public class MarcaCarro {
 
     @Override
     public String toString() {
-        return "MarcaCarro{" +
-                "idMarcaCarro=" + idMarcaCarro +
-                ", nome='" + nome + '\'' +
-                '}';
+        return "[" + idMarcaCarro + "] " +
+                "Nome = " + nome + " | ";
+
     }
 }

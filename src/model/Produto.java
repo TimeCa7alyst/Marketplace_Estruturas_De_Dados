@@ -1,6 +1,5 @@
 package model;
 
-import java.math.BigDecimal;
 
 abstract class Produto {
     private int idProduto;

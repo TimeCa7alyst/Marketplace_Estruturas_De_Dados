@@ -39,6 +39,7 @@ public class CarroController {
 
     public void create(Carro carro) {
         lista.insere(carro);
+        arvoreId.insere(carro);
         arvoreNome.insere(carro);
         arvoreMarca.insere(carro);
         System.out.println("Carro cadastrado com sucesso");

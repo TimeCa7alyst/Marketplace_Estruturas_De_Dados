@@ -17,8 +17,6 @@ public class Peca extends Produto {
         this.setPrecoBase(valor);
     }
 
-
-
     public Marca getMarca() {
         return marca;
     }
@@ -42,9 +40,10 @@ public class Peca extends Produto {
 
     @Override
     public String toString() {
-        return "Peca{" +
-                "marca=" + marca +
-                ", modeloCarro=" + modeloCarro +
-                '}';
+        return "[" + getIdProduto() + "] " +
+                "Nome = " + getNome() + " | " +
+                "Marca = " + marca.getNome() + " | " +
+                "Modelo = " + modeloCarro.getNome() + " | " +
+                "Valor = " + getPrecoBase();
     }
 }

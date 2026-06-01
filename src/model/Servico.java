@@ -30,8 +30,10 @@ public class Servico extends Produto {
 
     @Override
     public String toString() {
-        return "Servico{" +
-                "duracao=" + duracao +
-                '}';
+        return "[" + getIdProduto() + "] " +
+                "Nome = " + getNome() + " | " +
+                "Tipo = " + getTipo() + " | " +
+                "Valor = " + getPrecoBase() + " | " +
+                "Duração do Servico = " + duracao;
     }
 }
