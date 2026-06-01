@@ -38,10 +38,8 @@ public class Carro {
 
     @Override
     public String toString() {
-        return "Carro{" +
-                "idCarro=" + idCarro +
-                ", nome='" + nome + '\'' +
-                ", marca=" + marca +
-                '}';
+        return "[" + idCarro + "] " +
+                "Nome = " + nome + " | " +
+                "Marca = " + marca.getNome();
     }
 }

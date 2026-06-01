@@ -6,13 +6,18 @@ public class Servico extends Produto {
 
     private int duracao;
 
-    public Servico(int duracao) {
+    public Servico(int id, String nome, Tipo tipo, int duracao, int valor) {
+        super();
+        this.setIdProduto(id);
+        this.setNome(nome);
+        this.setTipo(tipo);
+        this.setPrecoBase(valor);
         this.duracao = duracao;
     }
 
     @Override
-    public BigDecimal calcularPrecoTotal() {
-        return null;
+    public int calcularPrecoTotal() {
+        return 0;
     }
 
     public int getDuracao() {

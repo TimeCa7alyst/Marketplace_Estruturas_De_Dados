@@ -117,13 +117,13 @@ public class ListaSimplesDinamica<T> {
         temp.setProximo(temp.getProximo().getProximo());
     }
 
-    public T getDado(int index) {
-        if (index < 0 || index >= tamanhoLista() || listaVazia()) {
+    public T getDado(int id) {
+        if (id < 0 || id >= tamanhoLista() || listaVazia()) {
             return null;
         }
 
         No<T> temp = this.inicio;
-        for (int i = 0; i < index; i++) {
+        for (int i = 0; i < id; i++) {
             temp = temp.getProximo();
         }
         return temp.getDado();

@@ -1,11 +1,29 @@
 package controller;
 
+import estruturas.ArvoreBinaria;
 import estruturas.ListaSimplesDinamica;
 import model.MarcaCarro;
+
+import java.util.Comparator;
 
 public class MarcaCarroController {
 
     ListaSimplesDinamica<MarcaCarro> lista;
+
+    ArvoreBinaria<MarcaCarro> arvoreId = new ArvoreBinaria<>(new Comparator<MarcaCarro>() {
+        @Override
+        public int compare(MarcaCarro o1, MarcaCarro o2) {
+            return Integer.compare(o1.getIdMarcaCarro(), o2.getIdMarcaCarro());
+        }
+    });
+
+    ArvoreBinaria<MarcaCarro> arvoreNome = new ArvoreBinaria<>(new Comparator<MarcaCarro>() {
+
+        @Override
+        public int compare(MarcaCarro o1, MarcaCarro o2) {
+            return o1.getNome().compareTo(o2.getNome());
+        }
+    });
 
     public MarcaCarroController(ListaSimplesDinamica<MarcaCarro> lista) {
         this.lista = lista;
@@ -14,6 +32,8 @@ public class MarcaCarroController {
 
     public void create(MarcaCarro marca) {
         lista.insere(marca);
+        arvoreId.insere(marca);
+        arvoreNome.insere(marca);
         System.out.println("Marca Cadastrada com sucesso");
     }
 
@@ -27,27 +47,31 @@ public class MarcaCarroController {
     }
 
     public MarcaCarro findById(int id) {
-        for (int i = 0; i < lista.tamanhoLista(); i++) {
-            MarcaCarro m = lista.getDado(i);
 
-            if (m.getIdMarcaCarro() == id) {
-                return m;
-            }
+        MarcaCarro marcaObj = new MarcaCarro(id, null);
+
+        MarcaCarro marcaResponse = arvoreNome.busca(marcaObj);
+
+        if (marcaResponse == null) {
+            System.out.println("Marca de ID: " + id + " não encontrada");
+            return null;
         }
-        System.out.println("Marca de ID: " + id + " não encontrada");
-        return null;
+
+        return marcaResponse;
     }
 
     public MarcaCarro findByName(String name) {
-        for (int i = 0; i < lista.tamanhoLista(); i++) {
-            MarcaCarro m = lista.getDado(i);
 
-            if (m.getNome().equals(name)) {
-                return m;
-            }
+        MarcaCarro marcaObj = new MarcaCarro(0, name);
+
+        MarcaCarro marcaResponse = arvoreNome.busca(marcaObj);
+
+        if (marcaResponse == null) {
+            System.out.println("Marca de nome: " + name + " não encontrada");
+            return null;
         }
-        System.out.println("Marca de nome: " + name + " não encontrada");
-        return null;
+
+        return marcaResponse;
     }
 
     public boolean remove(int id) {

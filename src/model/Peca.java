@@ -8,15 +8,16 @@ public class Peca extends Produto {
 
     private Carro modeloCarro;
 
-    public Peca(Marca marca, Carro modeloCarro) {
+    public Peca(int id, String nome, Marca marca, int valor, Carro modeloCarro) {
+        super();
+        this.setIdProduto(id);
+        this.setNome(nome);
         this.marca = marca;
         this.modeloCarro = modeloCarro;
+        this.setPrecoBase(valor);
     }
 
-    @Override
-    public BigDecimal calcularPrecoTotal() {
-        return null;
-    }
+
 
     public Marca getMarca() {
         return marca;
@@ -32,6 +33,11 @@ public class Peca extends Produto {
 
     public void setModeloCarro(Carro modeloCarro) {
         this.modeloCarro = modeloCarro;
+    }
+
+    @Override
+    public int calcularPrecoTotal() {
+        return 0;
     }
 
     @Override

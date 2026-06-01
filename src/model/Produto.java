@@ -6,10 +6,10 @@ abstract class Produto {
     private int idProduto;
     private String nome;
     private Tipo tipo;
-    private BigDecimal precoBase;
+    private int precoBase;
 
 
-    public abstract BigDecimal calcularPrecoTotal();
+    public abstract int calcularPrecoTotal();
 
     public int getIdProduto() {
         return idProduto;
@@ -35,11 +35,11 @@ abstract class Produto {
         this.tipo = tipo;
     }
 
-    public BigDecimal getPrecoBase() {
+    public int getPrecoBase() {
         return precoBase;
     }
 
-    public void setPrecoBase(BigDecimal precoBase) {
+    public void setPrecoBase(int precoBase) {
         this.precoBase = precoBase;
     }
 

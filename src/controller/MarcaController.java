@@ -1,11 +1,28 @@
 package controller;
 
+import estruturas.ArvoreBinaria;
 import estruturas.ListaSimplesDinamica;
 import model.Marca;
+
+import java.util.Comparator;
 
 public class MarcaController {
 
     ListaSimplesDinamica<Marca> lista;
+
+    ArvoreBinaria<Marca> arvoreId = new ArvoreBinaria<>(new Comparator<Marca>() {
+        @Override
+        public int compare(Marca o1, Marca o2) {
+            return Integer.compare(o1.getIdMarca(), o2.getIdMarca());
+        }
+    });
+
+    ArvoreBinaria<Marca> arvoreNome = new ArvoreBinaria<>(new Comparator<Marca>() {
+        @Override
+        public int compare(Marca o1, Marca o2) {
+            return o1.getNome().compareTo(o2.getNome());
+        }
+    });
 
     public MarcaController(ListaSimplesDinamica<Marca> lista) {
         this.lista = lista;
@@ -14,6 +31,8 @@ public class MarcaController {
 
     public void create(Marca marca) {
         lista.insere(marca);
+        arvoreId.insere(marca);
+        arvoreNome.insere(marca);
         System.out.println("Marca cadastrada com sucesso");
     }
 
@@ -27,27 +46,31 @@ public class MarcaController {
     }
 
     public Marca findById(int id) {
-        for (int i = 0; i < lista.tamanhoLista(); i++) {
-            Marca ma = lista.getDado(i);
 
-            if (ma.getIdMarca() == id) {
-                return ma;
-            }
+        Marca marcaObj = new Marca(id, null);
+
+        Marca marcaResponse = arvoreNome.busca(marcaObj);
+
+        if (marcaResponse == null) {
+            System.out.println("Marca de ID: " + id + " não encontrada");
+            return null;
         }
-        System.out.println("Marca de ID: " + id + " não encontrada");
-        return null;
+
+        return marcaResponse;
     }
 
     public Marca findByName(String name) {
-        for (int i = 0; i < lista.tamanhoLista(); i++) {
-            Marca ma = lista.getDado(i);
 
-            if (ma.getNome().equals(name)) {
-                return ma;
-            }
+        Marca marcaObj = new Marca(0, name);
+
+        Marca marcaResponse = arvoreNome.busca(marcaObj);
+
+        if (marcaResponse == null) {
+            System.out.println("Marca de nome: " + name + " não encontrada");
+            return null;
         }
-        System.out.println("Marca de nome: " + name + " não encontrada");
-        return null;
+
+        return marcaResponse;
     }
 
     public boolean remove(int id) {
@@ -55,6 +78,8 @@ public class MarcaController {
             Marca ma = lista.getDado(i);
 
             if (ma.getIdMarca() == id) {
+                arvoreId.remove(ma);
+                arvoreNome.remove(ma);
                 lista.removeMeio(i);
                 System.out.println("Marca removida com sucesso");
                 return true;

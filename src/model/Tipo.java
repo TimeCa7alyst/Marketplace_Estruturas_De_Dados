@@ -28,9 +28,6 @@ public class Tipo {
 
     @Override
     public String toString() {
-        return "Tipo{" +
-                "idTipo=" + idTipo +
-                ", nome='" + nome + '\'' +
-                '}';
+        return "[" + idTipo + "] - " + nome;
     }
 }

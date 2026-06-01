@@ -1,12 +1,36 @@
 package controller;
 
+import estruturas.ArvoreBinaria;
 import estruturas.ListaSimplesDinamica;
 import model.Carro;
 import model.MarcaCarro;
 
+import java.util.Comparator;
+
 public class CarroController {
 
     ListaSimplesDinamica<Carro> lista;
+
+    ArvoreBinaria<Carro> arvoreId = new ArvoreBinaria<>(new Comparator<Carro>() {
+        @Override
+        public int compare(Carro o1, Carro o2) {
+            return Integer.compare(o1.getIdCarro(), o2.getIdCarro());
+        }
+    });
+
+    ArvoreBinaria<Carro> arvoreNome = new ArvoreBinaria<>(new Comparator<Carro>() {
+        @Override
+        public int compare(Carro o1, Carro o2) {
+            return o1.getNome().compareToIgnoreCase(o2.getNome());
+        }
+    });
+
+    ArvoreBinaria<Carro> arvoreMarca = new ArvoreBinaria<>(new Comparator<Carro>() {
+        @Override
+        public int compare(Carro o1, Carro o2) {
+            return o1.getMarca().getNome().compareToIgnoreCase(o2.getMarca().getNome());
+        }
+    });
 
     public CarroController(ListaSimplesDinamica<Carro> lista) {
         this.lista = lista;
@@ -15,6 +39,8 @@ public class CarroController {
 
     public void create(Carro carro) {
         lista.insere(carro);
+        arvoreNome.insere(carro);
+        arvoreMarca.insere(carro);
         System.out.println("Carro cadastrado com sucesso");
     }
 
@@ -28,38 +54,41 @@ public class CarroController {
     }
 
     public Carro findById(int id) {
-        for (int i = 0; i < lista.tamanhoLista(); i++) {
-            Carro c = lista.getDado(i);
 
-            if (c.getIdCarro() == id) {
-                return c;
-            }
+        Carro carroObj = new Carro(id, null, null);
+
+        Carro carroResponse = arvoreId.busca(carroObj);
+
+        if (carroResponse == null) {
+            System.out.println("Carro de ID: " + id + " não encontrado");
         }
-        System.out.println("Carro com ID: " + id + " não foi encontrado");
-        return null;
+        return carroResponse;
     }
 
     public Carro findByName(String name) {
-        for (int i = 0; i < lista.tamanhoLista(); i++) {
-            Carro c = lista.getDado(i);
 
-            if (c.getNome().equals(name)) {
-                return c;
-            }
+        Carro carroObj = new Carro(0, name, null);
+
+        Carro carroResponse = arvoreNome.busca(carroObj);
+
+        if (carroResponse == null) {
+            System.out.println("Carro de nome: " + name + " não encontrado");
+            return null;
         }
-        System.out.println("Carro de nome: " + name + " não encontrado");
-        return null;
+
+        return carroResponse;
     }
 
     public Carro findByMarca(String marca) {
-        for (int i = 0; i < lista.tamanhoLista(); i++) {
-            Carro c = lista.getDado(i);
 
-            if (c.getMarca().getNome().equals(marca)) {
-                return c;
-            }
+        Carro carroObj = new Carro(0, null, new MarcaCarro(0, marca));
+
+        Carro carroResponse = arvoreMarca.busca(carroObj);
+
+        if (carroResponse == null) {
+            return null;
         }
-        return null;
+        return carroResponse;
     }
 
     public boolean remove(int id) {
@@ -67,6 +96,9 @@ public class CarroController {
             Carro c = lista.getDado(i);
 
             if (c.getIdCarro() == id) {
+                arvoreId.remove(c);
+                arvoreNome.remove(c);
+                arvoreMarca.remove(c);
                 lista.removeMeio(i);
                 System.out.println("Carro removido com sucesso");
                 return true;
