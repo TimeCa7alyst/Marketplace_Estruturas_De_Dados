@@ -29,6 +29,8 @@ public class CompraView {
             System.out.println("1 - Realizar Compra");
             System.out.println("2 - Listar todas as Compras");
             System.out.println("3 - Buscar Compra (por ID)");
+            System.out.println("4 - Editar Compra");
+            System.out.println("5 - Excluir Compra (por ID)");
             System.out.println("0 - Sair");
             System.out.print("Escolha uma opção: ");
 
@@ -44,6 +46,12 @@ public class CompraView {
                         break;
                     case 3:
                         buscarPorId();
+                        break;
+                    case 4:
+                        editarCompra();
+                        break;
+                    case 5:
+                        excluirCompra();
                         break;
                     case 0:
                         System.out.println("Encerrando módulo de compras...");
@@ -132,5 +140,161 @@ public class CompraView {
     private void listarTodos() {
         System.out.println("\n--- Registro de Compras ---");
         compraCtrl.findAll();
+    }
+
+    private void excluirCompra() {
+        System.out.println("\n--- Excluir Compra ---");
+        System.out.print("Digite o ID da compra que deseja excluir: ");
+
+        try {
+            int id = Integer.parseInt(scanner.nextLine());
+
+            compraCtrl.remove(id);
+
+        } catch (NumberFormatException e) {
+            System.out.println("Erro: Por favor, digite um ID numérico válido.");
+        }
+    }
+
+    private void editarCompra() {
+        System.out.println("\n--- Editar Compra ---");
+        System.out.print("Digite o ID da compra que deseja editar: ");
+
+        int idCompra;
+        try {
+            idCompra = Integer.parseInt(scanner.nextLine());
+        } catch (NumberFormatException e) {
+            System.out.println("Erro: ID inválido.");
+            return;
+        }
+
+        Compra compra = compraCtrl.findById(idCompra);
+
+        if (compra == null) {
+            return;
+        }
+
+        boolean editando = true;
+
+        while (editando) {
+            System.out.println("\n=== Editando Compra [" + compra.getIdCompra() + "] ===");
+            System.out.println("Total Atual: R$ " + compra.getTotal());
+            System.out.println("1 - Adicionar Item (ID ou Nome)");
+            System.out.println("2 - Remover Item (ID ou Nome)");
+            System.out.println("0 - Concluir Edição");
+            System.out.print("Escolha uma opção: ");
+
+            String opcaoEdit = scanner.nextLine();
+
+            switch (opcaoEdit) {
+                case "1":
+                    adicionarItemNaEdicao(compra);
+                    break;
+                case "2":
+                    removerItemNaEdicao(compra);
+                    break;
+                case "0":
+                    editando = false;
+                    System.out.println("Edição concluída com sucesso!");
+                    break;
+                default:
+                    System.out.println("Opção inválida.");
+            }
+
+            if (compra.getPecas().listaVazia() && compra.getServicos().listaVazia()) {
+                System.out.println("\n⚠️ A compra ficou sem nenhum item (peças ou serviços).");
+                System.out.println("Excluindo a compra automaticamente do sistema...");
+                compraCtrl.remove(compra.getIdCompra());
+                editando = false;
+            }
+        }
+    }
+
+    private void adicionarItemNaEdicao(Compra compra) {
+        System.out.print("Digite o ID ou Nome do serviço ou peça para ADICIONAR: ");
+        String entrada = scanner.nextLine().trim();
+        boolean itemEncontrado = false;
+
+        try {
+            int id = Integer.parseInt(entrada);
+
+            Servico servico = servicoCtrl.findById(id);
+            if (servico != null) {
+                compra.getServicos().insere(servico);
+                compra.setTotal(servico.getPrecoBase());
+                System.out.println("Serviço adicionado!");
+                itemEncontrado = true;
+            } else {
+                Peca peca = pecaCtrl.findById(id);
+                if (peca != null) {
+                    compra.getPecas().insere(peca);
+                    compra.setTotal(peca.getPrecoBase());
+                    System.out.println("Peça adicionada!");
+                    itemEncontrado = true;
+                }
+            }
+        } catch (NumberFormatException e) {
+            Peca peca = pecaCtrl.findByName(entrada);
+            if (peca != null) {
+                compra.getPecas().insere(peca);
+                compra.setTotal(peca.getPrecoBase());
+                System.out.println("Peça adicionada!");
+                itemEncontrado = true;
+            }
+        }
+
+        if (!itemEncontrado) {
+            System.out.println("Nenhum item encontrado no estoque com esse identificador.");
+        }
+    }
+
+    private void removerItemNaEdicao(Compra compra) {
+        System.out.print("Digite o ID ou Nome do item presente na compra para REMOVER: ");
+        String entrada = scanner.nextLine().trim();
+        boolean removido = false;
+
+        try {
+            int idBusca = Integer.parseInt(entrada);
+
+            for (int i = 0; i < compra.getServicos().tamanhoLista(); i++) {
+                Servico s = compra.getServicos().getDado(i);
+                if (s.getIdProduto() == idBusca) {
+                    compra.getServicos().removeMeio(i);
+                    compra.setTotal(-s.getPrecoBase());
+                    System.out.println("Serviço removido da compra!");
+                    removido = true;
+                    break;
+                }
+            }
+
+            if (!removido) {
+                for (int i = 0; i < compra.getPecas().tamanhoLista(); i++) {
+                    Peca p = compra.getPecas().getDado(i);
+                    if (p.getIdProduto() == idBusca) {
+                        compra.getPecas().removeMeio(i);
+                        compra.setTotal(-p.getPrecoBase());
+                        System.out.println("Peça removida da compra!");
+                        removido = true;
+                        break;
+                    }
+                }
+            }
+
+        } catch (NumberFormatException e) {
+            for (int i = 0; i < compra.getPecas().tamanhoLista(); i++) {
+                Peca p = compra.getPecas().getDado(i);
+                if (p.getNome().equalsIgnoreCase(entrada)) {
+                    compra.getPecas().removeMeio(i);
+                    compra.setTotal(-p.getPrecoBase());
+                    System.out.println("Peça removida da compra!");
+                    removido = true;
+                    break; // Sai do for
+                }
+            }
+        }
+
+        if (!removido) {
+            System.out.println("Este item não foi encontrado dentro desta compra.");
+        }
     }
 }
