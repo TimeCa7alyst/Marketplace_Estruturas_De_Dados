@@ -51,7 +51,7 @@ public class Peca extends Produto {
         return "[" + getIdProduto() + "] " +
                 "Nome = " + getNome() + " | " +
                 "Marca = " + marca.getNome() + " | " +
-                "Modelo = " + modeloCarro.getNome() + " | " +
-                "Valor = " + getPrecoBase();
+                "Compatível com = " + modeloCarro.getMarca().getNome() + " " + modeloCarro.getNome() + " | " +
+                "Valor = R$" + getPrecoBase();
     }
 }

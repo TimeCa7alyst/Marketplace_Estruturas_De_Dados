@@ -93,7 +93,11 @@ public class MarcaCarroView {
         int id = Integer.parseInt(scanner.nextLine());
 
         MarcaCarro marca = marcaCtrl.findById(id);
-        System.out.println(marca.toString());
+
+        if (marca != null) {
+            System.out.println(marca.toString());
+        }
+
     }
 
     private void buscarPorNome() {
@@ -102,6 +106,9 @@ public class MarcaCarroView {
         String nome = scanner.nextLine();
 
         MarcaCarro marca = marcaCtrl.findByName(nome);
-        System.out.println(marca.toString());
+
+        if (marca != null) {
+            System.out.println(marca.toString());
+        }
     }
 }

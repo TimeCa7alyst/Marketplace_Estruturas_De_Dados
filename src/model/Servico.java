@@ -40,8 +40,8 @@ public class Servico extends Produto {
     public String toString() {
         return "[" + getIdProduto() + "] " +
                 "Nome = " + getNome() + " | " +
-                "Tipo = " + getTipo() + " | " +
-                "Valor = " + getPrecoBase() + " | " +
-                "Duração do Servico = " + duracao;
+                "Tipo = " + getTipo().getNome() + " | " +
+                "Valor R$= " + getPrecoBase() + " | " +
+                "Duração do Servico = " + duracao + " Horas";
     }
 }

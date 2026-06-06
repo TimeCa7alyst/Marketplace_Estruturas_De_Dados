@@ -38,6 +38,6 @@ public class Marca {
     @Override
     public String toString() {
         return "[" + idMarca + "] " +
-                "Nome = " + nome + " | ";
+                "Nome = " + nome;
     }
 }

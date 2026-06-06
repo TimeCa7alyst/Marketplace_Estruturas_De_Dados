@@ -23,6 +23,9 @@ public class Main {
         CarroController carroCtrl = new CarroController(listaCarros);
         PecaController pecaCtrl = new PecaController(listaPecas);
         ServicoController servicoCtrl = new ServicoController(listaServicos);
+        MarcaCarroController marcaCarroCtrl = new MarcaCarroController(listaMarcaCarro);
+        MarcaController marcaCtrl = new MarcaController(listaMarca);
+        TipoController tipoCtrl = new TipoController(listaTipo);
 
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
@@ -51,8 +54,7 @@ public class Main {
                         break;
 
                     case 2:
-                        CarroController controller = new CarroController(listaCarros);
-                        CarroView uiCarro = new CarroView(controller);
+                        CarroView uiCarro = new CarroView(carroCtrl);
                         uiCarro.iniciar();
                         break;
 
@@ -62,18 +64,18 @@ public class Main {
                         break;
 
                     case 4:
-                        MarcaView marca = new MarcaView(marceCtrl);
+                        MarcaView uiMarca = new MarcaView(marceCtrl);
                         marca.iniciar();
                         break;
 
                     case 5:
-                        ServicoView servico = new ServicoView(servicoCtrl);
-                        servico.iniciar();
+                        ServicoView uiServico = new ServicoView(servicoCtrl);
+                        uiServico.iniciar();
                         break;
 
                     case 6:
-                        TipoView tipo = new TipoView(tipoCtrl);
-                        tipo.iniciar();
+                        TipoView uiTipo = new TipoView(tipoCtrl);
+                        uiTipo.iniciar();
                         break;
 
                     case 7:
