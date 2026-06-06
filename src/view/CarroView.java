@@ -102,7 +102,10 @@ public class CarroView {
         int id = Integer.parseInt(scanner.nextLine());
 
         Carro carro = carroCtrl.findById(id);
-        System.out.println(carro.toString());
+
+        if (carro != null) {
+            System.out.println(carro.toString());
+        }
     }
 
     private void buscarPorNome() {

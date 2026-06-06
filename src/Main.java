@@ -8,13 +8,23 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
 
+        // 1. Inicialização de TODAS as estruturas de dados (Listas)
+        // Isso garante que os dados persistam durante toda a execução da aplicação
         ListaSimplesDinamica<Carro> listaCarros = new ListaSimplesDinamica<>();
         ListaSimplesDinamica<Peca> listaPecas = new ListaSimplesDinamica<>();
         ListaSimplesDinamica<Servico> listaServicos = new ListaSimplesDinamica<>();
+        ListaSimplesDinamica<MarcaCarro> listaMarcaCarro = new ListaSimplesDinamica<>();
+        ListaSimplesDinamica<Marca> listaMarca = new ListaSimplesDinamica<>();
+        ListaSimplesDinamica<Tipo> listaTipo = new ListaSimplesDinamica<>();
 
+        // 2. Inicialização de TODOS os Controladores (onde as Árvores Binárias são criadas)
+        // Eles recebem as listas instanciadas acima
         CarroController carroCtrl = new CarroController(listaCarros);
         PecaController pecaCtrl = new PecaController(listaPecas);
         ServicoController servicoCtrl = new ServicoController(listaServicos);
+        MarcaCarroController marcaCarroCtrl = new MarcaCarroController(listaMarcaCarro);
+        MarcaController marcaCtrl = new MarcaController(listaMarca);
+        TipoController tipoCtrl = new TipoController(listaTipo);
 
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
@@ -35,6 +45,7 @@ public class Main {
             try {
                 opcao = Integer.parseInt(scanner.nextLine());
 
+                // 3. No switch, apenas instanciamos as Views passando os Controladores já existentes
                 switch (opcao) {
                     case 1:
                         PecaView uiPeca = new PecaView(pecaCtrl);
@@ -42,35 +53,28 @@ public class Main {
                         break;
 
                     case 2:
-                        CarroController controller = new CarroController(listaCarros);
-                        CarroView uiCarro = new CarroView(controller);
+                        CarroView uiCarro = new CarroView(carroCtrl);
                         uiCarro.iniciar();
                         break;
 
                     case 3:
-                        ListaSimplesDinamica<MarcaCarro> marcalistaSimpelsDinamica = new ListaSimplesDinamica<>();
-                        MarcaCarroController marcaCtrl = new MarcaCarroController(marcalistaSimpelsDinamica);
-                        MarcaCarroView uiMarca = new MarcaCarroView(marcaCtrl);
-                        uiMarca.iniciar();
+                        MarcaCarroView uiMarcaCarro = new MarcaCarroView(marcaCarroCtrl);
+                        uiMarcaCarro.iniciar();
                         break;
 
                     case 4:
-                        ListaSimplesDinamica<Marca> listaMarca = new ListaSimplesDinamica<>();
-                        MarcaController marceCtrl = new MarcaController(listaMarca);
-                        MarcaView marca = new MarcaView(marceCtrl);
-                        marca.iniciar();
+                        MarcaView uiMarca = new MarcaView(marcaCtrl);
+                        uiMarca.iniciar();
                         break;
 
                     case 5:
-                        ServicoView servico = new ServicoView(servicoCtrl);
-                        servico.iniciar();
+                        ServicoView uiServico = new ServicoView(servicoCtrl);
+                        uiServico.iniciar();
                         break;
 
                     case 6:
-                        ListaSimplesDinamica<Tipo> listaTipo = new ListaSimplesDinamica<>();
-                        TipoController tipoCtrl = new TipoController(listaTipo);
-                        TipoView tipo = new TipoView(tipoCtrl);
-                        tipo.iniciar();
+                        TipoView uiTipo = new TipoView(tipoCtrl);
+                        uiTipo.iniciar();
                         break;
 
                     case 0:

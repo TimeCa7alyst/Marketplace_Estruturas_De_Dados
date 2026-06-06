@@ -126,7 +126,8 @@ public class PecaView {
 
         Peca p = pecaCtrl.findById(id);
         if (p != null) {
-            System.out.println("Peça encontrada: " + p.getNome() + " | Marca: " + p.getMarca().getNome());
+            System.out.println("Peça encontrada: " + p.getNome() + " | Tipo: " + p.getTipo().getNome() + " | Marca: " + p.getMarca().getNome() +
+                    " | Compatível com: " + p.getModeloCarro().getMarca().getNome() + " " + p.getModeloCarro().getNome() + " | Valor: R$" + p.getPrecoBase());
         }
     }
 
@@ -137,7 +138,8 @@ public class PecaView {
 
         Peca p = pecaCtrl.findByName(nome);
         if (p != null) {
-            System.out.println("Peça encontrada: " + p.getNome() + " | Carro: " + p.getModeloCarro().getNome());
+            System.out.println("Peça encontrada: " + p.getNome() + " | Tipo: " + p.getTipo().getNome() + " | Marca: " + p.getMarca().getNome() +
+                    " | Compatível com: " + p.getModeloCarro().getMarca().getNome() + " " + p.getModeloCarro().getNome() + " | Valor: R$" + p.getPrecoBase());
         }
     }
 
@@ -148,7 +150,8 @@ public class PecaView {
 
         Peca p = pecaCtrl.findByMarca(marca);
         if (p != null) {
-            System.out.println("Peça encontrada: " + p.getNome() + " | Marca: " + p.getMarca().getNome());
+            System.out.println("Peça encontrada: " + p.getNome() + " | Tipo: " + p.getTipo().getNome() + " | Marca: " + p.getMarca().getNome() +
+                    " | Compatível com: " + p.getModeloCarro().getMarca().getNome() + " " + p.getModeloCarro().getNome() + " | Valor: R$" + p.getPrecoBase());
         }
     }
 
@@ -159,7 +162,8 @@ public class PecaView {
 
         Peca p = pecaCtrl.findByTipo(tipo);
         if (p != null) {
-            System.out.println("Peça encontrada: " + p.getNome() + " | Tipo: " + p.getTipo().getNome());
+            System.out.println("Peça encontrada: " + p.getNome() + " | Tipo: " + p.getTipo().getNome() + " | Marca: " + p.getMarca().getNome() +
+                    " | Compatível com: " + p.getModeloCarro().getMarca().getNome() + " " + p.getModeloCarro().getNome() + " | Valor: R$" + p.getPrecoBase());
         }
     }
 
@@ -170,7 +174,8 @@ public class PecaView {
 
         Peca p = pecaCtrl.findByCarro(carro);
         if (p != null) {
-            System.out.println("Peça encontrada: " + p.getNome() + " | Compatível com: " + p.getModeloCarro().getNome());
+            System.out.println("Peça encontrada: " + p.getNome() + " | Tipo: " + p.getTipo().getNome() + " | Marca: " + p.getMarca().getNome() +
+                    " | Compatível com: " + p.getModeloCarro().getMarca().getNome() + " " + p.getModeloCarro().getNome() + " | Valor: R$" + p.getPrecoBase());
         }
     }
 }
