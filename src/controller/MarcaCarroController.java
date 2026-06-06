@@ -1,7 +1,7 @@
 package controller;
 
-import estruturas.ArvoreBinaria;
-import estruturas.ListaSimplesDinamica;
+import services.ArvoreBinaria;
+import services.ListaSimplesDinamica;
 import model.MarcaCarro;
 
 import java.util.Comparator;
@@ -48,7 +48,7 @@ public class MarcaCarroController {
 
     public MarcaCarro findById(int id) {
 
-        MarcaCarro marcaObj = new MarcaCarro(id, null);
+        MarcaCarro marcaObj = new MarcaCarro(id);
 
         MarcaCarro marcaResponse = arvoreNome.busca(marcaObj);
 
@@ -62,7 +62,7 @@ public class MarcaCarroController {
 
     public MarcaCarro findByName(String name) {
 
-        MarcaCarro marcaObj = new MarcaCarro(0, name);
+        MarcaCarro marcaObj = new MarcaCarro(name);
 
         MarcaCarro marcaResponse = arvoreNome.busca(marcaObj);
 
@@ -89,11 +89,11 @@ public class MarcaCarroController {
     }
 
     private void dadosMock() {
-        create(new MarcaCarro(1, "Fiat"));
-        create(new MarcaCarro(2, "BMW"));
-        create(new MarcaCarro(3, "Ford"));
-        create(new MarcaCarro(4, "Toyota"));
-        create(new MarcaCarro(5, "Citroen"));
+        create(new MarcaCarro("Fiat"));
+        create(new MarcaCarro("BMW"));
+        create(new MarcaCarro("Ford"));
+        create(new MarcaCarro("Toyota"));
+        create(new MarcaCarro("Citroen"));
     }
 }
 

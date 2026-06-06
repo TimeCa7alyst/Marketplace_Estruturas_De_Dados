@@ -1,7 +1,7 @@
 package controller;
 
-import estruturas.ArvoreBinaria;
-import estruturas.ListaSimplesDinamica;
+import services.ArvoreBinaria;
+import services.ListaSimplesDinamica;
 import model.Servico;
 import model.Tipo;
 
@@ -40,8 +40,7 @@ public class ServicoController {
 
     public Servico findById(int id) {
 
-        Servico servicoObj = new Servico(id, null,
-                new Tipo(0, null), 3, 3000);
+        Servico servicoObj = new Servico(id);
 
         Servico servicoResponse = arvoreId.busca(servicoObj);
 
@@ -68,7 +67,7 @@ public class ServicoController {
     }
 
     private void dadosMock() {
-        create(new Servico(1, "Instalação motor", new Tipo(1, "Instalacao"),
+        create(new Servico("Instalação motor", new Tipo("Instalacao"),
                 3, 3000));
     }
 }

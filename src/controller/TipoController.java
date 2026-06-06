@@ -1,7 +1,7 @@
 package controller;
 
-import estruturas.ArvoreBinaria;
-import estruturas.ListaSimplesDinamica;
+import services.ArvoreBinaria;
+import services.ListaSimplesDinamica;
 import model.Tipo;
 
 import java.util.Comparator;
@@ -39,7 +39,7 @@ public class TipoController {
 
     public Tipo findByName(String name) {
 
-        Tipo tipoObj = new Tipo(0, name);
+        Tipo tipoObj = new Tipo(name);
 
         Tipo tipoResponse = arvoreNome.busca(tipoObj);
 
@@ -67,6 +67,6 @@ public class TipoController {
     }
 
     private void dadosMock() {
-        create(new Tipo(1, "Motores"));
+        create(new Tipo("Motores"));
     }
 }

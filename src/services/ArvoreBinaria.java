@@ -1,4 +1,4 @@
-package estruturas;
+package services;
 
 import java.util.Comparator;
 
@@ -95,16 +95,16 @@ public class ArvoreBinaria<T> {
         }
     }
 
-    public void printPosrecurso() {
+    public void printPoscurso() {
         System.out.println("Posrecurso: ");
-        posrecurso(this.raiz);
+        poscurso(this.raiz);
         System.out.println();
     }
 
-    private void posrecurso(No aux) {
+    private void poscurso(No aux) {
         if (aux != null) {
-            posrecurso(aux.getEsquerda());
-            posrecurso(aux.getDireita());
+            poscurso(aux.getEsquerda());
+            poscurso(aux.getDireita());
             System.out.print(aux.getValor().toString() + " | ");
         }
     }

@@ -1,13 +1,22 @@
 package model;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 public class Carro {
 
     private int idCarro;
     private String nome;
     private MarcaCarro marca;
 
-    public Carro(int idCarro, String nome, MarcaCarro marca) {
+    public Carro() {
+    }
+
+    public Carro(int idCarro) {
         this.idCarro = idCarro;
+    }
+
+    public Carro(String nome, MarcaCarro marca) {
+        this.idCarro = ThreadLocalRandom.current().nextInt(1_000_000);
         this.nome = nome;
         this.marca = marca;
     }

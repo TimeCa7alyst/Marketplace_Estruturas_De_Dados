@@ -1,14 +1,22 @@
 package model;
 
 import java.math.BigDecimal;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Servico extends Produto {
 
     private int duracao;
 
-    public Servico(int id, String nome, Tipo tipo, int duracao, int valor) {
+    public Servico() {
+    }
+
+    public Servico(int duracao) {
+        this.duracao = duracao;
+    }
+
+    public Servico(String nome, Tipo tipo, int duracao, int valor) {
         super();
-        this.setIdProduto(id);
+        this.setIdProduto(ThreadLocalRandom.current().nextInt(1_000_000));
         this.setNome(nome);
         this.setTipo(tipo);
         this.setPrecoBase(valor);
