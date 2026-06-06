@@ -1,4 +1,4 @@
-package estruturas;
+package services;
 
 public class ListaSimplesDinamica<T> {
 

@@ -1,7 +1,7 @@
 package controller;
 
-import estruturas.ArvoreBinaria;
-import estruturas.ListaSimplesDinamica;
+import services.ArvoreBinaria;
+import services.ListaSimplesDinamica;
 import model.Carro;
 import model.MarcaCarro;
 
@@ -56,7 +56,7 @@ public class CarroController {
 
     public Carro findById(int id) {
 
-        Carro carroObj = new Carro(id, null, null);
+        Carro carroObj = new Carro(id);
 
         Carro carroResponse = arvoreId.busca(carroObj);
 
@@ -68,7 +68,7 @@ public class CarroController {
 
     public Carro findByName(String name) {
 
-        Carro carroObj = new Carro(0, name, null);
+        Carro carroObj = new Carro(name, null);
 
         Carro carroResponse = arvoreNome.busca(carroObj);
 
@@ -82,7 +82,7 @@ public class CarroController {
 
     public Carro findByMarca(String marca) {
 
-        Carro carroObj = new Carro(0, null, new MarcaCarro(0, marca));
+        Carro carroObj = new Carro(null, new MarcaCarro(marca));
 
         Carro carroResponse = arvoreMarca.busca(carroObj);
 
@@ -110,9 +110,9 @@ public class CarroController {
     }
 
     private void dadosMock() {
-        create(new Carro(1, "Uno",
-                new MarcaCarro(1, "Fiat")));
-        create(new Carro(2, "Gol",
-                new MarcaCarro(2, "Volkswagen")));
+        create(new Carro("Uno",
+                new MarcaCarro("Fiat")));
+        create(new Carro("Gol",
+                new MarcaCarro("Volkswagen")));
     }
 }

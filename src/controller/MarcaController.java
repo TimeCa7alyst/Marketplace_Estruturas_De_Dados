@@ -1,7 +1,7 @@
 package controller;
 
-import estruturas.ArvoreBinaria;
-import estruturas.ListaSimplesDinamica;
+import services.ArvoreBinaria;
+import services.ListaSimplesDinamica;
 import model.Marca;
 
 import java.util.Comparator;
@@ -47,7 +47,7 @@ public class MarcaController {
 
     public Marca findById(int id) {
 
-        Marca marcaObj = new Marca(id, null);
+        Marca marcaObj = new Marca(id);
 
         Marca marcaResponse = arvoreNome.busca(marcaObj);
 
@@ -61,7 +61,7 @@ public class MarcaController {
 
     public Marca findByName(String name) {
 
-        Marca marcaObj = new Marca(0, name);
+        Marca marcaObj = new Marca(name);
 
         Marca marcaResponse = arvoreNome.busca(marcaObj);
 
@@ -90,9 +90,9 @@ public class MarcaController {
     }
 
     private void dadosMock() {
-        create(new Marca(1, "Bosch"));
-        create(new Marca(2, "Monroe"));
-        create(new Marca(3, "Nakata"));
+        create(new Marca("Bosch"));
+        create(new Marca("Monroe"));
+        create(new Marca("Nakata"));
     }
 
 }

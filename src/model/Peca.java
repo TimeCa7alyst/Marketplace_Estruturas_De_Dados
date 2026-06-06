@@ -1,6 +1,7 @@
 package model;
 
 import java.math.BigDecimal;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Peca extends Produto {
 
@@ -8,9 +9,16 @@ public class Peca extends Produto {
 
     private Carro modeloCarro;
 
-    public Peca(int id, String nome, Marca marca, int valor, Carro modeloCarro) {
-        super();
+    public Peca() {
+    }
+
+    public Peca(Integer id) {
         this.setIdProduto(id);
+    }
+
+    public Peca(String nome, Marca marca, int valor, Carro modeloCarro) {
+        super();
+        this.setIdProduto(ThreadLocalRandom.current().nextInt(1_000_000));
         this.setNome(nome);
         this.marca = marca;
         this.modeloCarro = modeloCarro;

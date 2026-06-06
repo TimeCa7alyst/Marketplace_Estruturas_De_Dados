@@ -1,23 +1,17 @@
-import controller.CarroController;
-import controller.PecaController;
-import controller.ServicoController;
-import estruturas.ListaSimplesDinamica;
-import model.Carro;
-import model.MarcaCarro;
-import model.Peca;
-import model.Servico;
+import controller.*;
+import model.*;
+import services.ListaSimplesDinamica;
+import view.*;
 
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
-        // 1. Instanciar as Listas Base (O "Disco" da nossa Base de Dados)
         ListaSimplesDinamica<Carro> listaCarros = new ListaSimplesDinamica<>();
         ListaSimplesDinamica<Peca> listaPecas = new ListaSimplesDinamica<>();
         ListaSimplesDinamica<Servico> listaServicos = new ListaSimplesDinamica<>();
 
-        // 2. Injetar as dependências nos Controllers (Isto vai disparar os dadosMock)
         CarroController carroCtrl = new CarroController(listaCarros);
         PecaController pecaCtrl = new PecaController(listaPecas);
         ServicoController servicoCtrl = new ServicoController(listaServicos);
@@ -29,12 +23,12 @@ public class Main {
             System.out.println("\n=======================================");
             System.out.println("      SISTEMA DE GESTÃO - AUTO PEÇAS     ");
             System.out.println("=======================================");
-            System.out.println("1. Listar Catálogo de Peças (Lista Simples)");
-            System.out.println("2. Listar Carros Cadastrados (Lista Simples)");
-            System.out.println("3. Buscar Peça por NOME (Árvore Binária)");
-            System.out.println("4. Buscar Carro por ID (Árvore Binária)");
-            System.out.println("5. Cadastrar Novo Carro");
-            System.out.println("6. Remover Carro por ID");
+            System.out.println("1. Peças (Página)");
+            System.out.println("2. Carro (Página)");
+            System.out.println("3. Marcas de Carro (Página)");
+            System.out.println("4. Marca de Peças (Página)");
+            System.out.println("5. Serviços (Página)");
+            System.out.println("6. Tipos de Peças (Página)");
             System.out.println("0. Sair do Sistema");
             System.out.print("Escolha uma operação: ");
 
@@ -43,62 +37,40 @@ public class Main {
 
                 switch (opcao) {
                     case 1:
-                        System.out.println("\n--- CATÁLOGO DE PEÇAS ---");
-                        pecaCtrl.findAll(); // Operação O(N)
+                        PecaView uiPeca = new PecaView(pecaCtrl);
+                        uiPeca.iniciar();
                         break;
 
                     case 2:
-                        System.out.println("\n--- CARROS CADASTRADOS ---");
-                        carroCtrl.findAll(); // Operação O(N)
+                        CarroController controller = new CarroController(listaCarros);
+                        CarroView uiCarro = new CarroView(controller);
+                        uiCarro.iniciar();
                         break;
 
                     case 3:
-                        System.out.print("\nDigite o NOME da peça a buscar (ex: Amortecedor): ");
-                        String nomePeca = scanner.nextLine();
-                        System.out.println("A pesquisar nos índices da Árvore Binária...");
-                        Peca pecaEncontrada = pecaCtrl.findByName(nomePeca); // Operação O(log N)
-
-                        if (pecaEncontrada != null) {
-                            System.out.println(">> SUCESSO: " + pecaEncontrada.toString());
-                        }
+                        ListaSimplesDinamica<MarcaCarro> marcalistaSimpelsDinamica = new ListaSimplesDinamica<>();
+                        MarcaCarroController marcaCtrl = new MarcaCarroController(marcalistaSimpelsDinamica);
+                        MarcaCarroView uiMarca = new MarcaCarroView(marcaCtrl);
+                        uiMarca.iniciar();
                         break;
 
                     case 4:
-                        System.out.print("\nDigite o ID do carro a buscar (ex: 1 ou 2): ");
-                        int idCarroBusca = Integer.parseInt(scanner.nextLine());
-                        System.out.println("A pesquisar nos índices da Árvore Binária...");
-                        Carro carroEncontrado = carroCtrl.findById(idCarroBusca); // Operação O(log N)
-
-                        if (carroEncontrado != null) {
-                            System.out.println(">> SUCESSO: " + carroEncontrado.toString());
-                        }
+                        ListaSimplesDinamica<Marca> listaMarca = new ListaSimplesDinamica<>();
+                        MarcaController marceCtrl = new MarcaController(listaMarca);
+                        MarcaView marca = new MarcaView(marceCtrl);
+                        marca.iniciar();
                         break;
 
                     case 5:
-                        System.out.println("\n--- NOVO REGISTO DE CARRO ---");
-                        System.out.print("Digite o ID numérico do carro: ");
-                        int idNovo = Integer.parseInt(scanner.nextLine());
-
-                        System.out.print("Digite o Modelo do carro (ex: Celta): ");
-                        String modeloNovo = scanner.nextLine();
-
-                        System.out.print("Digite o ID da Marca: ");
-                        int idMarca = Integer.parseInt(scanner.nextLine());
-
-                        System.out.print("Digite o Nome da Marca (ex: Chevrolet): ");
-                        String nomeMarca = scanner.nextLine();
-
-                        // Criação das instâncias
-                        MarcaCarro novaMarca = new MarcaCarro(idMarca, nomeMarca);
-                        Carro novoCarro = new Carro(idNovo, modeloNovo, novaMarca);
-
-                        carroCtrl.create(novoCarro); // Insere na Lista E nas Árvores!
+                        ServicoView servico = new ServicoView(servicoCtrl);
+                        servico.iniciar();
                         break;
 
                     case 6:
-                        System.out.print("\nDigite o ID do carro que deseja remover: ");
-                        int idRemover = Integer.parseInt(scanner.nextLine());
-                        carroCtrl.remove(idRemover);
+                        ListaSimplesDinamica<Tipo> listaTipo = new ListaSimplesDinamica<>();
+                        TipoController tipoCtrl = new TipoController(listaTipo);
+                        TipoView tipo = new TipoView(tipoCtrl);
+                        tipo.iniciar();
                         break;
 
                     case 0:

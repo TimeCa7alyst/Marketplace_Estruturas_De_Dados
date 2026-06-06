@@ -1,7 +1,7 @@
 package controller;
 
-import estruturas.ArvoreBinaria;
-import estruturas.ListaSimplesDinamica;
+import services.ArvoreBinaria;
+import services.ListaSimplesDinamica;
 import model.Carro;
 import model.Marca;
 import model.MarcaCarro;
@@ -75,7 +75,7 @@ public class PecaController {
 
 
     public Peca findById(int id) {
-        Peca pecaObj = new Peca(id, null, null, 0, new Carro(0, null, new MarcaCarro(0, null)));
+        Peca pecaObj = new Peca(id);
         Peca pecaResponse = arvoreId.busca(pecaObj);
 
         if (pecaResponse == null) {
@@ -86,7 +86,7 @@ public class PecaController {
     }
 
     public Peca findByMarca(String marca) {
-        Peca pecaObj = new Peca(0, null, new Marca(0, marca), 0, new Carro(0, null, new MarcaCarro(0, null)));
+        Peca pecaObj = new Peca(null, new Marca(marca), 0, new Carro(null, new MarcaCarro(null)));
         Peca pecaResponse = arvoreMarca.busca(pecaObj);
 
         if (pecaResponse == null) {
@@ -97,8 +97,8 @@ public class PecaController {
     }
 
     public Peca findByTipo(String tipo) {
-        Peca pecaObj = new Peca(0, null, null, 0, new Carro(0, null, new MarcaCarro(0, null)));
-        pecaObj.setTipo(new Tipo(0, tipo));
+        Peca pecaObj = new Peca(null, null, 0, new Carro(null, new MarcaCarro(null)));
+        pecaObj.setTipo(new Tipo(tipo));
 
         Peca pecaResponse = arvoreTipo.busca(pecaObj);
 
@@ -110,7 +110,7 @@ public class PecaController {
     }
 
     public Peca findByName(String nome) {
-        Peca pecaObj = new Peca(0, nome, null, 0, new Carro(0, null, new MarcaCarro(0, null)));
+        Peca pecaObj = new Peca(nome, null, 0, new Carro(null, new MarcaCarro(null)));
         Peca pecaResponse = arvoreNome.busca(pecaObj);
 
         if (pecaResponse == null) {
@@ -121,7 +121,7 @@ public class PecaController {
     }
 
     public Peca findByCarro(String carro) {
-        Peca pecaObj = new Peca(0, null, null, 0, new Carro(0, carro, new MarcaCarro(0, null)));
+        Peca pecaObj = new Peca(null, null, 0, new Carro(carro, new MarcaCarro(null)));
         Peca pecaResponse = arvoreCarro.busca(pecaObj);
 
         if (pecaResponse == null) {
@@ -152,9 +152,9 @@ public class PecaController {
     }
 
     private void dadosMock() {
-        Peca pecaMock = new Peca(1, "Amortecedor", new Marca(1, "Bosch"), 3000, new Carro(1, "Gol", new MarcaCarro(1, "Volkswagen")));
+        Peca pecaMock = new Peca("Amortecedor", new Marca("Bosch"), 3000, new Carro("Gol", new MarcaCarro("Volkswagen")));
 
-        pecaMock.setTipo(new Tipo(1, "Suspensão"));
+        pecaMock.setTipo(new Tipo("Suspensão"));
 
         create(pecaMock);
     }
