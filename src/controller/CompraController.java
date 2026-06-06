@@ -51,6 +51,21 @@ public class CompraController {
         return marcaResponse;
     }
 
+    public boolean remove(int id) {
+        for (int i = 0; i < listaComprasSistema.tamanhoLista(); i++) {
+            Compra c = listaComprasSistema.getDado(i);
+
+            if (c.getIdCompra() == id) {
+                arvoreId.remove(c);
+                listaComprasSistema.removeMeio(i);
+                System.out.println("Compra removida com sucesso");
+                return true;
+            }
+        }
+        System.out.println("Não foi possível remover a compra de ID: " + id);
+        return false;
+    }
+
     private void dadosMock() {
         ListaSimplesDinamica<Servico> servicos1 = new ListaSimplesDinamica<>();
         ListaSimplesDinamica<Peca> pecas1 = new ListaSimplesDinamica<>();
