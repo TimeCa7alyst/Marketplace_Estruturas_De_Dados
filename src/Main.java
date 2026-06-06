@@ -12,20 +12,17 @@ public class Main {
         ListaSimplesDinamica<Peca> listaPecas = new ListaSimplesDinamica<>();
         ListaSimplesDinamica<Servico> listaServicos = new ListaSimplesDinamica<>();
         ListaSimplesDinamica<Compra> listaCompra = new ListaSimplesDinamica<>();
-        ListaSimplesDinamica<MarcaCarro> marcalistaSimpelsDinamica = new ListaSimplesDinamica<>();
+        ListaSimplesDinamica<MarcaCarro> listaMarcaCarro = new ListaSimplesDinamica<>();
         ListaSimplesDinamica<Marca> listaMarca = new ListaSimplesDinamica<>();
         ListaSimplesDinamica<Tipo> listaTipo = new ListaSimplesDinamica<>();
 
         TipoController tipoCtrl = new TipoController(listaTipo);
         MarcaController marceCtrl = new MarcaController(listaMarca);
-        MarcaCarroController marcaCtrl = new MarcaCarroController(marcalistaSimpelsDinamica);
+        MarcaCarroController marcaCarroCtrl = new MarcaCarroController(listaMarcaCarro);
         CompraController compraCtrl = new CompraController(listaCompra);
         CarroController carroCtrl = new CarroController(listaCarros);
         PecaController pecaCtrl = new PecaController(listaPecas);
         ServicoController servicoCtrl = new ServicoController(listaServicos);
-        MarcaCarroController marcaCarroCtrl = new MarcaCarroController(listaMarcaCarro);
-        MarcaController marcaCtrl = new MarcaController(listaMarca);
-        TipoController tipoCtrl = new TipoController(listaTipo);
 
         Scanner scanner = new Scanner(System.in);
         int opcao = -1;
@@ -59,13 +56,13 @@ public class Main {
                         break;
 
                     case 3:
-                        MarcaCarroView uiMarca = new MarcaCarroView(marcaCtrl);
-                        uiMarca.iniciar();
+                        MarcaCarroView uiMarcaCarro = new MarcaCarroView(marcaCarroCtrl);
+                        uiMarcaCarro.iniciar();
                         break;
 
                     case 4:
                         MarcaView uiMarca = new MarcaView(marceCtrl);
-                        marca.iniciar();
+                        uiMarca.iniciar();
                         break;
 
                     case 5:
