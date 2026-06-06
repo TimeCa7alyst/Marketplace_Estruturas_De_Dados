@@ -40,7 +40,8 @@ public class ServicoController {
 
     public Servico findById(int id) {
 
-        Servico servicoObj = new Servico(id);
+        Servico servicoObj = new Servico();
+        servicoObj.setIdProduto(id);
 
         Servico servicoResponse = arvoreId.busca(servicoObj);
 

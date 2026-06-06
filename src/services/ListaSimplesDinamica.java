@@ -137,4 +137,23 @@ public class ListaSimplesDinamica<T> {
             temp = temp.getProximo();
         }
     }
+
+    @Override
+    public String toString() {
+        if (this.inicio == null) {
+            return "Vazio";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("[\n");
+
+        No<T> temp = this.inicio;
+        while (temp != null) {
+            sb.append("  ").append(temp.getDado().toString()).append("\n");
+            temp = temp.getProximo();
+        }
+
+        sb.append("]");
+        return sb.toString();
+    }
 }

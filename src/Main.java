@@ -11,7 +11,15 @@ public class Main {
         ListaSimplesDinamica<Carro> listaCarros = new ListaSimplesDinamica<>();
         ListaSimplesDinamica<Peca> listaPecas = new ListaSimplesDinamica<>();
         ListaSimplesDinamica<Servico> listaServicos = new ListaSimplesDinamica<>();
+        ListaSimplesDinamica<Compra> listaCompra = new ListaSimplesDinamica<>();
+        ListaSimplesDinamica<MarcaCarro> marcalistaSimpelsDinamica = new ListaSimplesDinamica<>();
+        ListaSimplesDinamica<Marca> listaMarca = new ListaSimplesDinamica<>();
+        ListaSimplesDinamica<Tipo> listaTipo = new ListaSimplesDinamica<>();
 
+        TipoController tipoCtrl = new TipoController(listaTipo);
+        MarcaController marceCtrl = new MarcaController(listaMarca);
+        MarcaCarroController marcaCtrl = new MarcaCarroController(marcalistaSimpelsDinamica);
+        CompraController compraCtrl = new CompraController(listaCompra);
         CarroController carroCtrl = new CarroController(listaCarros);
         PecaController pecaCtrl = new PecaController(listaPecas);
         ServicoController servicoCtrl = new ServicoController(listaServicos);
@@ -29,6 +37,7 @@ public class Main {
             System.out.println("4. Marca de Peças (Página)");
             System.out.println("5. Serviços (Página)");
             System.out.println("6. Tipos de Peças (Página)");
+            System.out.println("7. Compra (Página)");
             System.out.println("0. Sair do Sistema");
             System.out.print("Escolha uma operação: ");
 
@@ -48,15 +57,11 @@ public class Main {
                         break;
 
                     case 3:
-                        ListaSimplesDinamica<MarcaCarro> marcalistaSimpelsDinamica = new ListaSimplesDinamica<>();
-                        MarcaCarroController marcaCtrl = new MarcaCarroController(marcalistaSimpelsDinamica);
                         MarcaCarroView uiMarca = new MarcaCarroView(marcaCtrl);
                         uiMarca.iniciar();
                         break;
 
                     case 4:
-                        ListaSimplesDinamica<Marca> listaMarca = new ListaSimplesDinamica<>();
-                        MarcaController marceCtrl = new MarcaController(listaMarca);
                         MarcaView marca = new MarcaView(marceCtrl);
                         marca.iniciar();
                         break;
@@ -67,10 +72,13 @@ public class Main {
                         break;
 
                     case 6:
-                        ListaSimplesDinamica<Tipo> listaTipo = new ListaSimplesDinamica<>();
-                        TipoController tipoCtrl = new TipoController(listaTipo);
                         TipoView tipo = new TipoView(tipoCtrl);
                         tipo.iniciar();
+                        break;
+
+                    case 7:
+                        CompraView compra = new CompraView(compraCtrl, pecaCtrl, servicoCtrl);
+                        compra.iniciar();
                         break;
 
                     case 0:

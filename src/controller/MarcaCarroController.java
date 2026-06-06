@@ -50,7 +50,7 @@ public class MarcaCarroController {
 
         MarcaCarro marcaObj = new MarcaCarro(id);
 
-        MarcaCarro marcaResponse = arvoreNome.busca(marcaObj);
+        MarcaCarro marcaResponse = arvoreId.busca(marcaObj);
 
         if (marcaResponse == null) {
             System.out.println("Marca de ID: " + id + " não encontrada");
