@@ -67,48 +67,6 @@ public class ArvoreBinaria<T> {
         return true;
     }
 
-    public void printPrecurso() {
-        System.out.println("Precurso: ");
-        precurso(this.raiz);
-        System.out.println();
-    }
-
-    private void precurso(No aux) {
-        if (aux != null) {
-            System.out.print(aux.getValor().toString() + " | ");
-            precurso(aux.getEsquerda());
-            precurso(aux.getDireita());
-        }
-    }
-
-    public void printIncurso() {
-        System.out.println("Incurso (Ordenado): ");
-        incurso(this.raiz);
-        System.out.println();
-    }
-
-    private void incurso(No aux) {
-        if (aux != null) {
-            incurso(aux.getEsquerda());
-            System.out.print(aux.getValor().toString() + " | ");
-            incurso(aux.getDireita());
-        }
-    }
-
-    public void printPoscurso() {
-        System.out.println("Posrecurso: ");
-        poscurso(this.raiz);
-        System.out.println();
-    }
-
-    private void poscurso(No aux) {
-        if (aux != null) {
-            poscurso(aux.getEsquerda());
-            poscurso(aux.getDireita());
-            System.out.print(aux.getValor().toString() + " | ");
-        }
-    }
-
     public int grau(No aux) {
         if ((aux.getDireita() == null) && (aux.getEsquerda() == null)) return 0;
         if ((aux.getDireita() == null) || (aux.getEsquerda() == null)) return 1;
