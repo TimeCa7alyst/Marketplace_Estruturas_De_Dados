@@ -110,9 +110,13 @@ public class CarroController {
     }
 
     private void dadosMock() {
-        create(new Carro("Uno",
-                new MarcaCarro("Fiat")));
-        create(new Carro("Gol",
-                new MarcaCarro("Volkswagen")));
+        create(new Carro("Uno", new MarcaCarro("Fiat")));
+        create(new Carro("Gol", new MarcaCarro("Volkswagen")));
+        create(new Carro("Santana", new MarcaCarro("Volkswagen")));
+        create(new Carro("Civic", new MarcaCarro("Honda")));
+        create(new Carro("Corolla", new MarcaCarro("Toyota")));
+        create(new Carro("Celta", new MarcaCarro("Chevrolet")));
+        create(new Carro("Palio", new MarcaCarro("Fiat")));
+        create(new Carro("Ka", new MarcaCarro("Ford")));
     }
 }

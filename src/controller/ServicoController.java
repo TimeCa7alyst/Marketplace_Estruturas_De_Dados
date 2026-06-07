@@ -18,6 +18,13 @@ public class ServicoController {
         }
     });
 
+    ArvoreBinaria<Servico> arvoreNome = new ArvoreBinaria<>(new Comparator<Servico>() {
+        @Override
+        public int compare(Servico o1, Servico o2) {
+            return o1.getNome().compareToIgnoreCase(o2.getNome());
+        }
+    });
+
     public ServicoController(ListaSimplesDinamica<Servico> lista) {
         this.lista = lista;
         dadosMock();
@@ -25,6 +32,7 @@ public class ServicoController {
 
     public void create(Servico servico) {
         lista.insere(servico);
+        arvoreNome.insere(servico);
         arvoreId.insere(servico);
         System.out.println("Serviço inserido com sucesso");
     }
@@ -39,17 +47,17 @@ public class ServicoController {
     }
 
     public Servico findById(int id) {
-
         Servico servicoObj = new Servico();
         servicoObj.setIdProduto(id);
 
-        Servico servicoResponse = arvoreId.busca(servicoObj);
+        return arvoreId.busca(servicoObj);
+    }
 
-        if (servicoResponse == null) {
-            System.out.println("Serviço com ID: " + id + " não foi encontrado");
-            return null;
-        }
-        return servicoResponse;
+    public Servico findByName(String nome) {
+        Servico servicoObj = new Servico();
+        servicoObj.setNome(nome);
+
+        return arvoreNome.busca(servicoObj);
     }
 
     public boolean remove(int id) {
@@ -58,6 +66,7 @@ public class ServicoController {
 
             if (s.getIdProduto() == id) {
                 arvoreId.remove(s);
+                arvoreNome.remove(s);
                 lista.removeMeio(i);
                 System.out.println("Serviço removido com sucesso");
                 return true;
@@ -68,7 +77,13 @@ public class ServicoController {
     }
 
     private void dadosMock() {
-        create(new Servico("Instalação motor", new Tipo("Instalacao"),
-                3, 3000));
+        create(new Servico("Instalacao motor", new Tipo("Instalacao"), 3, 3000));
+        create(new Servico("Troca de oleo", new Tipo("Manutencao"), 1, 150));
+        create(new Servico("Alinhamento e Balanceamento", new Tipo("Manutencao"), 2, 200));
+        create(new Servico("Manutencao Carburador", new Tipo("Alimentacao"), 4, 350));
+        create(new Servico("Limpeza de Bico Injetor", new Tipo("Limpeza"), 1, 180));
+        create(new Servico("Revisao Eletrica Motor", new Tipo("Revisao"), 3, 280));
+        create(new Servico("Troca de Pastilhas de Freio", new Tipo("Manutencao"), 2, 250));
+        create(new Servico("Troca de Amortecedores", new Tipo("Suspensao"), 3, 600));
     }
 }

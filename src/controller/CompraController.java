@@ -25,7 +25,7 @@ public class CompraController {
     public void create(Compra compra) {
         listaComprasSistema.insere(compra);
         arvoreId.insere(compra);
-        System.out.println("Compra cadastrada com sucesso!");
+        System.out.println("Compra cadastrada com sucesso");
     }
 
     public void findAll() {

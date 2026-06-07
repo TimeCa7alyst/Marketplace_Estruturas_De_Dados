@@ -19,7 +19,7 @@ public class TipoView {
         int opcao = -1;
 
         do {
-            System.out.println("\n=== MÓDULO DE TIPOS ===");
+            System.out.println("\n=== TIPOS ===");
             System.out.println("1 - Cadastrar novo Tipo");
             System.out.println("2 - Remover Tipo (por ID)");
             System.out.println("3 - Listar todos os Tipos");

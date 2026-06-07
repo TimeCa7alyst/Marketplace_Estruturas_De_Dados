@@ -20,7 +20,7 @@ public class MarcaController {
     ArvoreBinaria<Marca> arvoreNome = new ArvoreBinaria<>(new Comparator<Marca>() {
         @Override
         public int compare(Marca o1, Marca o2) {
-            return o1.getNome().compareTo(o2.getNome());
+            return o1.getNome().compareToIgnoreCase(o2.getNome());
         }
     });
 
@@ -93,6 +93,14 @@ public class MarcaController {
         create(new Marca("Bosch"));
         create(new Marca("Monroe"));
         create(new Marca("Nakata"));
+        create(new Marca("Cofap"));
+        create(new Marca("NGK"));
+        create(new Marca("Brosol"));
+        create(new Marca("Magneti Marelli"));
+        create(new Marca("Moura"));
+        create(new Marca("Valeo"));
+        create(new Marca("Delphi"));
+        create(new Marca("Pirelli"));
     }
 
 }

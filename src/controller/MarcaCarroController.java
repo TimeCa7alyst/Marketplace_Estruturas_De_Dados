@@ -80,6 +80,8 @@ public class MarcaCarroController {
 
             if (m.getIdMarcaCarro() == id) {
                 lista.removeMeio(i);
+                arvoreId.remove(m);
+                arvoreNome.remove(m);
                 System.out.println("Marca Removida com sucesso");
                 return true;
             }
@@ -94,6 +96,14 @@ public class MarcaCarroController {
         create(new MarcaCarro("Ford"));
         create(new MarcaCarro("Toyota"));
         create(new MarcaCarro("Citroen"));
+        create(new MarcaCarro("Volkswagen"));
+        create(new MarcaCarro("Honda"));
+        create(new MarcaCarro("Chevrolet"));
+        create(new MarcaCarro("Nissan"));
+        create(new MarcaCarro("Renault"));
+        create(new MarcaCarro("Peugeot"));
+        create(new MarcaCarro("Hyundai"));
+        create(new MarcaCarro("Jeep"));
     }
 }
 

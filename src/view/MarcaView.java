@@ -19,7 +19,7 @@ public class MarcaView {
         int opcao = -1;
 
         do {
-            System.out.println("\n=== MÓDULO DE MARCAS DE PEÇAS ===");
+            System.out.println("\n=== MARCAS DE PEÇAS ===");
             System.out.println("1 - Cadastrar nova Marca");
             System.out.println("2 - Remover Marca (por ID)");
             System.out.println("3 - Listar todas as Marcas");

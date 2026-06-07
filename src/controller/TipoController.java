@@ -13,7 +13,7 @@ public class TipoController {
     ArvoreBinaria<Tipo> arvoreNome = new ArvoreBinaria<>(new Comparator<Tipo>() {
         @Override
         public int compare(Tipo o1, Tipo o2) {
-            return o1.getNome().compareTo(o2.getNome());
+            return o1.getNome().compareToIgnoreCase(o2.getNome());
         }
     });
 
@@ -67,6 +67,17 @@ public class TipoController {
     }
 
     private void dadosMock() {
+        create(new Tipo("Motor"));
         create(new Tipo("Motores"));
+        create(new Tipo("Suspensao"));
+        create(new Tipo("Freios"));
+        create(new Tipo("Alimentacao"));
+        create(new Tipo("Eletrica"));
+        create(new Tipo("Ignicao"));
+        create(new Tipo("Rodas"));
+        create(new Tipo("Instalacao"));
+        create(new Tipo("Manutencao"));
+        create(new Tipo("Limpeza"));
+        create(new Tipo("Revisao"));
     }
 }

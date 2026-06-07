@@ -20,7 +20,7 @@ public class ServicoView {
         int opcao = -1;
 
         do {
-            System.out.println("\n=== MÓDULO DE SERVIÇOS ===");
+            System.out.println("\n=== SERVIÇOS ===");
             System.out.println("1 - Cadastrar novo Serviço");
             System.out.println("2 - Remover Serviço (por ID)");
             System.out.println("3 - Listar todos os Serviços");

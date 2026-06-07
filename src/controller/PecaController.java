@@ -61,14 +61,14 @@ public class PecaController {
         arvoreTipo.insere(peca);
         arvoreNome.insere(peca);
         arvoreCarro.insere(peca);
-        System.out.println("Peça cadastrada com sucesso nas árvores de indexação.");
+        System.out.println("Peça cadastrada com sucesso nas árvores");
     }
 
     public void findAll() {
         if (lista.listaVazia()) {
             System.out.println("Lista vazia | Nenhuma peça cadastrada");
         } else {
-            System.out.println("Lista de peças:");
+            System.out.println("Lista de peças:\n");
             lista.printLista();
         }
     }
@@ -76,59 +76,28 @@ public class PecaController {
 
     public Peca findById(int id) {
         Peca pecaObj = new Peca(id);
-        Peca pecaResponse = arvoreId.busca(pecaObj);
-
-        if (pecaResponse == null) {
-            System.out.println("Peça de ID: " + id + " não encontrada");
-            return null;
-        }
-        return pecaResponse;
+        return arvoreId.busca(pecaObj);
     }
 
     public Peca findByMarca(String marca) {
         Peca pecaObj = new Peca(null, new Marca(marca), 0, new Carro(null, new MarcaCarro(null)));
-        Peca pecaResponse = arvoreMarca.busca(pecaObj);
-
-        if (pecaResponse == null) {
-            System.out.println("Nenhuma peça da marca: " + marca + " foi encontrada");
-            return null;
-        }
-        return pecaResponse;
+        return arvoreMarca.busca(pecaObj);
     }
 
     public Peca findByTipo(String tipo) {
         Peca pecaObj = new Peca(null, null, 0, new Carro(null, new MarcaCarro(null)));
         pecaObj.setTipo(new Tipo(tipo));
-
-        Peca pecaResponse = arvoreTipo.busca(pecaObj);
-
-        if (pecaResponse == null) {
-            System.out.println("Nenhuma peça do tipo: " + tipo + " foi encontrada");
-            return null;
-        }
-        return pecaResponse;
+        return arvoreTipo.busca(pecaObj);
     }
 
     public Peca findByName(String nome) {
         Peca pecaObj = new Peca(nome, null, 0, new Carro(null, new MarcaCarro(null)));
-        Peca pecaResponse = arvoreNome.busca(pecaObj);
-
-        if (pecaResponse == null) {
-            System.out.println("Peça de nome: " + nome + " não encontrada");
-            return null;
-        }
-        return pecaResponse;
+        return arvoreNome.busca(pecaObj);
     }
 
     public Peca findByCarro(String carro) {
         Peca pecaObj = new Peca(null, null, 0, new Carro(carro, new MarcaCarro(null)));
-        Peca pecaResponse = arvoreCarro.busca(pecaObj);
-
-        if (pecaResponse == null) {
-            System.out.println("Nenhuma peça para o carro: " + carro + " foi encontrada");
-            return null;
-        }
-        return pecaResponse;
+        return arvoreCarro.busca(pecaObj);
     }
 
 
@@ -152,10 +121,32 @@ public class PecaController {
     }
 
     private void dadosMock() {
-        Peca pecaMock = new Peca("Amortecedor", new Marca("Bosch"), 3000, new Carro("Gol", new MarcaCarro("Volkswagen")));
+        Peca peca1 = new Peca("Amortecedor", new Marca("Bosch"), 350, new Carro("Gol", new MarcaCarro("Volkswagen")));
+        peca1.setTipo(new Tipo("Suspensao"));
+        create(peca1);
 
-        pecaMock.setTipo(new Tipo("Suspensão"));
+        Peca peca2 = new Peca("Pastilha de Freio", new Marca("Nakata"), 120, new Carro("Uno", new MarcaCarro("Fiat")));
+        peca2.setTipo(new Tipo("Freios"));
+        create(peca2);
 
-        create(pecaMock);
+        Peca peca3 = new Peca("Carburador Brosol 2E", new Marca("Brosol"), 850, new Carro("Santana", new MarcaCarro("Volkswagen")));
+        peca3.setTipo(new Tipo("Alimentacao"));
+        create(peca3);
+
+        Peca peca4 = new Peca("Bateria 60Ah", new Marca("Moura"), 450, new Carro("Corolla", new MarcaCarro("Toyota")));
+        peca4.setTipo(new Tipo("Eletrica"));
+        create(peca4);
+
+        Peca peca5 = new Peca("Filtro de Oleo", new Marca("Bosch"), 45, new Carro("Civic", new MarcaCarro("Honda")));
+        peca5.setTipo(new Tipo("Motor"));
+        create(peca5);
+
+        Peca peca6 = new Peca("Velas de Ignicao", new Marca("NGK"), 160, new Carro("Celta", new MarcaCarro("Chevrolet")));
+        peca6.setTipo(new Tipo("Ignicao"));
+        create(peca6);
+
+        Peca peca7 = new Peca("Pneu 175/70 R14", new Marca("Pirelli"), 380, new Carro("Palio", new MarcaCarro("Fiat")));
+        peca7.setTipo(new Tipo("Rodas"));
+        create(peca7);
     }
 }

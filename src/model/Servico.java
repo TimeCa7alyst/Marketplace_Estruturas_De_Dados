@@ -41,7 +41,7 @@ public class Servico extends Produto {
         return "[" + getIdProduto() + "] " +
                 "Nome = " + getNome() + " | " +
                 "Tipo = " + getTipo().getNome() + " | " +
-                "Valor R$= " + getPrecoBase() + " | " +
+                "Valor = R$" + getPrecoBase() + " | " +
                 "Duração do Servico = " + duracao + " Horas";
     }
 }

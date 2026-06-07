@@ -20,7 +20,7 @@ public class CarroView {
         int opcao = -1;
 
         do {
-            System.out.println("\n=== MÓDULO DE CARROS ===");
+            System.out.println("\n=== CARROS ===");
             System.out.println("1 - Cadastrar novo Carro");
             System.out.println("2 - Remover Carro (por ID)");
             System.out.println("3 - Listar todos os Carros");

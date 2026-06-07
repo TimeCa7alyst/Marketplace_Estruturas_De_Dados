@@ -19,7 +19,7 @@ public class PecaView {
         int opcao = -1;
 
         do {
-            System.out.println("\n=== MÓDULO DE PEÇAS ===");
+            System.out.println("\n=== PEÇAS ===");
             System.out.println("1 - Cadastrar nova Peça");
             System.out.println("2 - Remover Peça (por ID)");
             System.out.println("3 - Listar todas as Peças");

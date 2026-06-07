@@ -62,9 +62,10 @@ public class Compra {
 
     @Override
     public String toString() {
-        return "[" + idCompra + "] " +
-                "Total = " + total + " | " +
+        return "[ID da Compra: " + idCompra + "] " +
+                "Total = R$" + total  +
                 "\nServiços = " + servicos.toString() +
-                "\nPeças = " + pecas.toString();
+                "\nPeças = " + pecas.toString() + "\n\n" +
+                "--------------------------------------\n";
     }
 }
